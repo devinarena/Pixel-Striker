@@ -1,0 +1,202 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://assets/grass.png" type="Texture" id=1]
+[ext_resource path="res://assets/DefaultTheme.tres" type="Theme" id=2]
+[ext_resource path="res://script/Menu.gd" type="Script" id=3]
+[ext_resource path="res://assets/ball.png" type="Texture" id=4]
+[ext_resource path="res://assets/goalie_idle.png" type="Texture" id=5]
+[ext_resource path="res://assets/goal.png" type="Texture" id=6]
+[ext_resource path="res://assets/ARCADECLASSIC.TTF" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/sign_in_button.png" type="Texture" id=8]
+[ext_resource path="res://assets/sign_in_button_pressed.png" type="Texture" id=9]
+[ext_resource path="res://assets/achievements_button_pressed.png" type="Texture" id=10]
+[ext_resource path="res://assets/leaderboards_button_pressed.png" type="Texture" id=11]
+[ext_resource path="res://assets/achievements_button.png" type="Texture" id=12]
+[ext_resource path="res://assets/leaderboards_button.png" type="Texture" id=13]
+[ext_resource path="res://assets/sign_out_button_pressed.png" type="Texture" id=14]
+[ext_resource path="res://assets/sign_out_button.png" type="Texture" id=15]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 7 )
+
+[node name="Menu" type="Node"]
+script = ExtResource( 3 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="GUI" type="Control" parent="."]
+anchor_left = 0.25
+anchor_top = 0.166667
+anchor_right = 0.75
+anchor_bottom = 0.833333
+theme = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="Container" type="VBoxContainer" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_bottom = 33.0002
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GUI/Container"]
+margin_right = 384.0
+margin_bottom = 49.0
+text = "Pixel Striker"
+align = 1
+valign = 1
+
+[node name="FreeKicks" type="Button" parent="GUI/Container"]
+margin_left = 80.0
+margin_top = 59.0
+margin_right = 304.0
+margin_bottom = 103.0
+rect_min_size = Vector2( 224, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Free Kicks"
+
+[node name="Goalie" type="Button" parent="GUI/Container"]
+margin_left = 80.0
+margin_top = 113.0
+margin_right = 304.0
+margin_bottom = 157.0
+rect_min_size = Vector2( 224, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Goalie"
+
+[node name="Penalties" type="Button" parent="GUI/Container"]
+margin_left = 80.0
+margin_top = 167.0
+margin_right = 304.0
+margin_bottom = 211.0
+rect_min_size = Vector2( 224, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Penalties"
+
+[node name="Settings" type="Button" parent="GUI/Container"]
+margin_left = 80.0
+margin_top = 221.0
+margin_right = 304.0
+margin_bottom = 265.0
+rect_min_size = Vector2( 224, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Settings"
+
+[node name="Label" type="Label" parent="GUI"]
+anchor_left = 1.04167
+anchor_top = 1.15234
+anchor_right = 1.5
+anchor_bottom = 1.25
+custom_fonts/font = SubResource( 1 )
+text = "Devin  Arena"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="GPGSButtons" type="HBoxContainer" parent="GUI"]
+margin_left = -160.0
+margin_top = 256.0
+margin_right = 32.0
+margin_bottom = 304.0
+custom_constants/separation = 16
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SignInButton" type="TextureButton" parent="GUI/GPGSButtons"]
+margin_left = 72.0
+margin_right = 120.0
+margin_bottom = 48.0
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 9 )
+
+[node name="SignOutButton" type="TextureButton" parent="GUI/GPGSButtons"]
+visible = false
+margin_left = 104.0
+margin_right = 152.0
+margin_bottom = 48.0
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 14 )
+texture_hover = ExtResource( 14 )
+
+[node name="LeaderboardsButton" type="TextureButton" parent="GUI/GPGSButtons"]
+visible = false
+margin_left = 104.0
+margin_right = 152.0
+margin_bottom = 48.0
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 11 )
+texture_hover = ExtResource( 11 )
+
+[node name="AchievementsButton" type="TextureButton" parent="GUI/GPGSButtons"]
+visible = false
+margin_left = 136.0
+margin_right = 184.0
+margin_bottom = 48.0
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 10 )
+texture_hover = ExtResource( 10 )
+
+[node name="Ball" type="TextureRect" parent="."]
+anchor_left = 0.208333
+anchor_top = 0.4375
+anchor_right = 0.270833
+anchor_bottom = 0.5625
+margin_bottom = -1.52588e-05
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Goal" type="TextureRect" parent="."]
+anchor_left = 0.916667
+anchor_top = 0.0833333
+anchor_right = 1.0
+anchor_bottom = 0.916667
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Goalie" type="TextureRect" parent="."]
+anchor_left = 0.854167
+anchor_top = 0.375
+anchor_right = 0.921875
+anchor_bottom = 0.625
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+[connection signal="pressed" from="GUI/Container/FreeKicks" to="." method="_on_FreeKicks_pressed"]
+[connection signal="pressed" from="GUI/Container/Goalie" to="." method="_on_Goalie_pressed"]
+[connection signal="pressed" from="GUI/Container/Penalties" to="." method="_on_Penalties_pressed"]
+[connection signal="pressed" from="GUI/Container/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="GUI/GPGSButtons/SignInButton" to="." method="_on_SignInOutButton_pressed"]
+[connection signal="pressed" from="GUI/GPGSButtons/SignOutButton" to="." method="_on_SignOutButton_pressed"]
+[connection signal="pressed" from="GUI/GPGSButtons/LeaderboardsButton" to="." method="_on_LeaderboardsButton_pressed"]
+[connection signal="pressed" from="GUI/GPGSButtons/AchievementsButton" to="." method="_on_AchievementsButton_pressed"]

@@ -1,0 +1,334 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://scenes/Ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/grass.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Goal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://script/Game.gd" type="Script" id=4]
+[ext_resource path="res://scenes/Goalie.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/sound/win.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/messagebar.png" type="Texture" id=8]
+[ext_resource path="res://assets/DefaultTheme.tres" type="Theme" id=9]
+[ext_resource path="res://script/HUD.gd" type="Script" id=10]
+[ext_resource path="res://assets/ARCADECLASSIC.TTF" type="DynamicFontData" id=11]
+[ext_resource path="res://assets/retry_button.png" type="Texture" id=12]
+[ext_resource path="res://assets/home_button.png" type="Texture" id=13]
+[ext_resource path="res://assets/retry_button_press.png" type="Texture" id=14]
+[ext_resource path="res://assets/home_button_hover.png" type="Texture" id=15]
+[ext_resource path="res://assets/ball_medal.png" type="Texture" id=16]
+[ext_resource path="res://assets/driven_shot_button.png" type="Texture" id=17]
+[ext_resource path="res://assets/incurve_shot_button.png" type="Texture" id=18]
+[ext_resource path="res://assets/outcurve_shot_button.png" type="Texture" id=19]
+[ext_resource path="res://assets/incurve_shot_button_selected.png" type="Texture" id=20]
+[ext_resource path="res://assets/outcurve_shot_button_disabled.png" type="Texture" id=21]
+[ext_resource path="res://assets/driven_shot_button_selected.png" type="Texture" id=22]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 36
+font_data = ExtResource( 11 )
+
+[sub_resource type="Animation" id=4]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("HUD/MessageBar:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 384 ), Vector2( 0, 176 ), Vector2( 0, 144 ), Vector2( 0, -64 ) ]
+}
+
+[node name="Game" type="Node"]
+script = ExtResource( 4 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Ball" parent="." instance=ExtResource( 1 )]
+position = Vector2( 256, 192 )
+
+[node name="Goalie" parent="." instance=ExtResource( 5 )]
+position = Vector2( 656, 192 )
+scale = Vector2( 2, 2 )
+
+[node name="Goal" parent="." instance=ExtResource( 3 )]
+position = Vector2( 736, 192 )
+scale = Vector2( 2, 2 )
+
+[node name="ResetTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="HUD" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 9 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Container" type="VBoxContainer" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 0.192708
+mouse_filter = 2
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="HUD/Container"]
+margin_right = 768.0
+margin_bottom = 25.0
+theme = ExtResource( 9 )
+custom_fonts/font = SubResource( 1 )
+text = "score"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Score" type="Label" parent="HUD/Container"]
+margin_top = 25.0
+margin_right = 768.0
+margin_bottom = 74.0
+theme = ExtResource( 9 )
+custom_fonts/font = ExtResource( 6 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="MessageBar" type="TextureRect" parent="HUD"]
+self_modulate = Color( 1, 1, 1, 0.501961 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.16667
+margin_top = -448.0
+margin_bottom = -448.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Text" type="Label" parent="HUD/MessageBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0, 0.490196, 0.0745098, 1 )
+text = "Test"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoseDialog" type="PanelContainer" parent="HUD"]
+visible = false
+margin_left = 208.0
+margin_top = 80.0
+margin_right = 560.0
+margin_bottom = 304.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="VBoxContainer" parent="HUD/LoseDialog"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 349.0
+margin_bottom = 221.0
+custom_constants/separation = 16
+
+[node name="Label" type="Label" parent="HUD/LoseDialog/Container"]
+margin_right = 346.0
+margin_bottom = 49.0
+custom_fonts/font = SubResource( 2 )
+text = "You     lost"
+align = 1
+valign = 1
+
+[node name="ScoreRow" type="HBoxContainer" parent="HUD/LoseDialog/Container"]
+margin_top = 65.0
+margin_right = 346.0
+margin_bottom = 145.0
+custom_constants/separation = 32
+alignment = 1
+
+[node name="ScoreColumn" type="VBoxContainer" parent="HUD/LoseDialog/Container/ScoreRow"]
+margin_left = 27.0
+margin_right = 127.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="HUD/LoseDialog/Container/ScoreRow/ScoreColumn"]
+margin_right = 100.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 3 )
+text = "Score"
+align = 1
+valign = 1
+
+[node name="Text" type="Label" parent="HUD/LoseDialog/Container/ScoreRow/ScoreColumn"]
+margin_top = 42.0
+margin_right = 100.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 3 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="BestColumn" type="VBoxContainer" parent="HUD/LoseDialog/Container/ScoreRow"]
+margin_left = 159.0
+margin_right = 239.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="HUD/LoseDialog/Container/ScoreRow/BestColumn"]
+margin_right = 80.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 3 )
+text = "Best"
+align = 1
+valign = 1
+
+[node name="Text" type="Label" parent="HUD/LoseDialog/Container/ScoreRow/BestColumn"]
+margin_top = 42.0
+margin_right = 80.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 3 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="Medal" type="TextureRect" parent="HUD/LoseDialog/Container/ScoreRow"]
+modulate = Color( 0.462745, 0.439216, 0.741176, 1 )
+margin_left = 271.0
+margin_top = 16.0
+margin_right = 319.0
+margin_bottom = 64.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 16 )
+
+[node name="ButtonBar" type="HBoxContainer" parent="HUD/LoseDialog/Container"]
+margin_top = 161.0
+margin_right = 346.0
+margin_bottom = 209.0
+custom_constants/separation = 8
+alignment = 1
+
+[node name="RetryButton" type="TextureButton" parent="HUD/LoseDialog/Container/ButtonBar"]
+margin_left = 121.0
+margin_right = 169.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 14 )
+texture_hover = ExtResource( 14 )
+expand = true
+
+[node name="HomeButton" type="TextureButton" parent="HUD/LoseDialog/Container/ButtonBar"]
+margin_left = 177.0
+margin_right = 225.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 15 )
+texture_hover = ExtResource( 15 )
+expand = true
+
+[node name="HomeButton" type="TextureButton" parent="HUD"]
+anchor_left = 0.0208333
+anchor_top = 0.0416667
+anchor_right = 0.0833333
+anchor_bottom = 0.166667
+margin_right = 3.8147e-06
+margin_bottom = -0.000114441
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 15 )
+texture_hover = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ShotButtons" type="HBoxContainer" parent="HUD"]
+margin_left = 16.0
+margin_top = 320.0
+margin_right = 160.0
+margin_bottom = 368.0
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DrivenShot" type="TextureButton" parent="HUD/ShotButtons"]
+margin_right = 48.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+texture_normal = ExtResource( 17 )
+texture_disabled = ExtResource( 22 )
+expand = true
+
+[node name="InCurveShot" type="TextureButton" parent="HUD/ShotButtons"]
+margin_left = 64.0
+margin_right = 112.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+texture_normal = ExtResource( 18 )
+texture_disabled = ExtResource( 20 )
+expand = true
+
+[node name="OutCurveShot" type="TextureButton" parent="HUD/ShotButtons"]
+margin_left = 128.0
+margin_right = 176.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+texture_normal = ExtResource( 19 )
+texture_disabled = ExtResource( 21 )
+expand = true
+
+[node name="Win" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+bus = "SFX"
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/messagebar = SubResource( 4 )
+[connection signal="timeout" from="ResetTimer" to="." method="_on_ResetTimer_timeout"]
+[connection signal="pressed" from="HUD/LoseDialog/Container/ButtonBar/RetryButton" to="." method="_on_RetryButton_pressed"]
+[connection signal="pressed" from="HUD/LoseDialog/Container/ButtonBar/HomeButton" to="." method="_on_HomeButton_pressed"]
+[connection signal="pressed" from="HUD/HomeButton" to="." method="_on_HomeButton_pressed"]
+[connection signal="pressed" from="HUD/ShotButtons/DrivenShot" to="HUD" method="_on_DrivenShot_pressed"]
+[connection signal="pressed" from="HUD/ShotButtons/InCurveShot" to="HUD" method="_on_InCurveShot_pressed"]
+[connection signal="pressed" from="HUD/ShotButtons/OutCurveShot" to="HUD" method="_on_OutCurveShot_pressed"]
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
