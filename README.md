@@ -21,11 +21,17 @@ This app is available on the Google Play Store:
 
 # Images
 <div align="center">
+  
   ![Feature 1](assets/feature.png)
+  
   ![Feature 2](assets/feature2.png)
+  
   ![Feature 3](assets/feature3.png)
+  
   ![Feature 4](assets/feature4.png)
+  
   ![Feature 5](assets/feature5.png)
+  
 </div>
 
 # License
