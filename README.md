@@ -17,7 +17,7 @@ In this gamemode, the ball is positioned randomly and you are always positioned 
 Includes user preferences and integration to Google Play Game Services. Contains 6 unique achievements (2 for each gamemode) and 3 leaderboards (1 for each gamemode).
 
 # Getting Started
-This app is available on the Google Play Store:
+This app is available on the Google Play Store: https://play.google.com/store/apps/details?id=io.github.devinarena.pixelstriker
 
 # Images
 <div align="center">
